@@ -33,7 +33,7 @@ describe('Testing Login pada SIAKAD Polinema', () => {
     it('Testing Username terisi, password kosong',()=>{
         cy.visit('http://siakad.polinema.ac.id/')
         cy.get('.btn-success').click()
-        cy.contains('Username harus diisi')
+        cy.contains('Password harus diisi')
     });
 
     it('Testing Username terisi dan benar, password terisi salah',()=>{
@@ -42,5 +42,38 @@ describe('Testing Login pada SIAKAD Polinema', () => {
         cy.get('#password').type('1831710121')
         cy.get('.btn-success').click()
         cy.contains('Username / Password Salah')
+    });
+
+    it('Testing Tampilkan Password', () => {
+        cy.visit('http://siakad.polinema.ac.id/')
+        cy.get('#username').type('1831710121')
+        cy.get('#password').type('1831710121')
+        cy.get('#chk_tampilkan').check()
+    });
+
+    it('Testing Lupa Password', () => {
+        cy.visit('http://siakad.polinema.ac.id/')
+        cy.contains('Lupa Password?')//.click()
+    });
+
+    it('Testing Layout Responsive', () => {
+        cy.visit('http://siakad.polinema.ac.id/')
+        cy.viewport('iphone-6')
+
+        cy.visit('http://siakad.polinema.ac.id/')
+        cy.viewport('macbook-16')
+
+        cy.visit('http://siakad.polinema.ac.id/')
+        cy.viewport('ipad-mini')
+    });
+
+    it('Testing cara Daftar Ulang', () => {
+        cy.visit('http://siakad.polinema.ac.id/')
+        cy.contains('PEMBAYARAN DAFTAR ULANG').click()
+    });
+
+    it('Testing Mekanisme Pembayaran', () => {
+        cy.visit('http://siakad.polinema.ac.id/')
+        cy.contains('LIHAT MEKANISME').click()
     });
 })
